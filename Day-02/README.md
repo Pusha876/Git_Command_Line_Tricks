@@ -1,0 +1,1 @@
+This cheat sheet covers essential Git commands that  every developer should know. It also includes some advanced commands for more complex tasks.
