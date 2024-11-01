@@ -68,7 +68,7 @@ git commit <span style="color: red;"> -am </span> <span style="color: yellow;"> 
 
 Stages and commits all tracked files in one step. This command does not include untracked files.
 
-## VViewing Changes
+## Viewing Changes
 ```
 git diff
 ```
