@@ -12,12 +12,12 @@
 1. **echo** - Print any text that follows the command
 1. **less** - Linux command to display paged outputs in the terminal
 1. **man** - Access manual pages for all linux commands
-1. **uname** - Linux command to get basic information about the outputs
+1. [**uname** - Linux command to get basic information about the outputs](image/uname-and-whoami-commands.png)
 1. **whoami** - Get the active username
-1. **tar** - Command to extract and compress files in linux
-1. **grep** - Search for a string within an outputs
-1. **head** - Return the specified number of lines from the top
-1. **tail** - Return the specified number of lines from the bottom
+1. [**tar** - Command to extract and compress files in linux](image/tar-basic-usage.png)
+1. [**grep** - Search for a string within an outputs](image/grep-command-example.png)
+1. [**head** - Return the specified number of lines from the top](image/head-command.png)
+1. [**tail** - Return the specified number of lines from the bottom](image/tail-command.png)
 1. **diff** - Find the difference between two files
 1. **cmp** - Allows you to check if two files are identical
 1. **comm** - Combines the functionality of diff and cmp
@@ -183,17 +183,143 @@ The simple way to do this is with the use of the pipe operator (``|``).
 ```
 root@ubuntu:~# cat /boot/grub/grub.cfg | less
 ```
-Note: Use the -S flag with less to enable line wrapping. This will allow you to view long lines of text without scrolling horizontally.
+Note: Use the ``-S`` flag with ``less`` to enable line wrapping. This will allow you to view long lines of text without scrolling horizontally.
 
-Use the -N flag with less to display line numbers. This can be useful when you need to know the line number of a specific piece of text.
+Use the ``-N`` flag with ``less`` to display line numbers. This can be useful when you need to know the line number of a specific piece of text.
 
 You can use these useful flags in the following way:
 ```
 root@ubuntu:~# cat /boot/grub/grub.cfg | less -sn
 ```
-Using less with the pipe operator can be useful in many different situations. Here are a few examples:
+Using ``less`` with the pipe operator can be useful in many different situations. Here are a few examples:
 
-Viewing the output of a long-running command, such as top or htop.
-Searching for specific text in the output of a command, such as grep or cat .
+Viewing the output of a long-running command, such as ``top`` or ``htop``.
+Searching for specific text in the output of a command, such as ``grep`` or ``cat``.
 
 ---
+## The ```man``` command in Linux
+The ``man`` command is a very useful Linux command one must know. When working with Linux, the packages that we download can have a lot of functionality. Knowing it all is impossible.
+
+The ``man`` command in Linux is used to display the manual page for a specific command. It provides detailed information about the command, including its syntax, options, and examples.
+
+Here’s an example of how to use the ``man`` command:
+
+Open a terminal and type ``man ls`` to display the manual page for the ``ls`` command.
+
+```
+root@ubuntu:~# man ls
+```
+
+This will display a page that looks something like this:
+```
+OutputLS(1)                            User Commands                           LS(1)
+
+NAME
+       ls - list directory contents
+
+SYNOPSIS
+       ls [OPTION]... [FILE]...
+
+DESCRIPTION
+       List information about the FILEs (the current directory by default).
+
+       Sort entries alphabetically if none of -cftuvSUX nor --sort is specified.
+
+       Mandatory arguments to long options are mandatory for short options too.
+
+       -a, --all
+              do not ignore entries starting with .
+
+       -A, --almost-all
+              do not list implied . and ..
+
+       -c     with -lt: sort by, and show, ctime (time of last modification
+              of file status information) with -l: show ctime and sort
+              by name; 
+```
+
+---
+## The ```uname``` and ```whoami`` commands
+The ``uname`` and ``whoami`` commands allow you to access some basic information that comes in handy when you work on multiple systems.
+
+The ``uname`` command in Linux displays information about the system’s kernel, including the kernel name, hostname, kernel release, kernel version, and machine hardware name.
+
+The ``whoami`` command in Linux returns the current user’s username. It stands for “who am I?” and it’s often used to determine the current user’s identity in shell scripts or the terminal.
+
+```
+root@ubuntu:~# uname -a
+```
+
+![alt text](image/uname-and-whoami-commands.png)
+
+The parameter ``-a`` with ``uname`` command stands for "all". This prints out the complete information. If the parameter is not added, all you will get as the output is "Linux".
+
+Note: Some important flags you can use with the uname command.
+
+* Use ``uname -s`` to display the kernel name.
+* Use ``uname -n`` to display the hostname.
+* Use ``uname -r`` to display the kernel release.
+* Use ``uname -v`` to display the kernel version.
+* Use ``uname -m`` to display the machine hardware name.
+
+---
+## The ```tar```, ```zip```, and ```unzip``` commands
+The ``tar`` command in Linux is used to create and extract archived files. We can extract multiple different archive files using the ``tar`` command.
+
+To create an archive, we use the ``-c`` parameter, and to extract an archive, we use the ``-x`` parameter. Let’s see how it works.
+
+```
+#Compress
+root@ubuntu:~# tar -cvf <archive name> <files separated by space>
+#Extract
+root@ubuntu:~# tar -xvf <archive name>
+```
+![alt text](image/tar-basic-usage.png)
+
+In the first line, we created an archive named Compress.tar with the New-File and New-File-Link. In the next command, we have extracted those files from the archive.
+
+Let’s discuss the ``zip`` and ``unzip`` commands. Both are very straightforward. You can use them without any parameters, and they’ll work as intended. 
+
+```
+root@ubuntu:~# zip <archive name> <file names separated by space>
+root@ubuntu:~# unzip <archive name>
+```
+![alt text](image/zip-unzip-commands.png)
+
+Since we already have those files in the same directory, the ``unzip`` command prompts us before overwriting those files.
+
+---
+## The ```grep``` command in Linux
+The ``grep`` command is a powerful and versatile text search tool in Linux and Unix-based operating systems. It can search for specific patterns or strings in one or more files and filter the output of other commands.
+
+The ``grep`` command stands for “global regular expression print,” which reflects its ability to search for regular expressions across multiple lines and files.
+```
+root@ubuntu:~# <Any command with output> | grep "<string to find>"
+```
+
+![alt text](image/grep-command-example.png)
+
+---
+## The ```head``` and ```tail``` commands
+When outputting large files, the ``head`` and ``tail`` commands come in handy. These commands display the beginning or end of a file, respectively. They are commonly used to quickly view the contents of a file without having to open it in a text editor.
+
+The ``head`` and ``tail`` commands display the first 10 lines of a file by default. To display a different number of lines, you can use the ``-n`` option, followed by the number of lines you want to display.
+
+Here’s an example of using the ``head`` and ``tail`` commands:
+```
+root@ubuntu:~# head <file name>
+root@ubuntu:~# tail <file name>
+```
+
+![alt text](image/head-command.png)
+
+As you can see, the head command showed 10 lines from the top of the file.
+
+![alt text](image/tail-command.png)
+
+The tail command outputted the bottom 10 lines from the file.
+
+These commands can be used to quickly view a file’s contents, monitor real-time updates for troubleshooting issues, filter output from other commands, and perform log analysis.
+
+---
+## The ```diff```, ```comm```, and ```cmp``` commands
